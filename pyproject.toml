@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "be_code_challenge"
+version = "1.0.0"
+description = "Parking rate service API that calculates pricing"
+authors = ["genesis self <genesiscself@gmail.com>"]
+packages = [{include = "src/be_code_challenge"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Flask = "*"
+Flask-Migrate = "*"
+SQLAlchemy = "*"
+python-dotenv = "*"
+pytz = "*"
+requests = "*"
+python-dateutil = "*"
+pytest-cov = "*"
+black = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-cov = "*"
+
+[tool.poetry.scripts]
+run-app = "src.be_code_challenge.app:create_app"
+
+[tool.black]
+line-length = 88
+
+[tool.coverage.run]
+branch = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov --cov-report=html"
+pythonpath = "."
