@@ -22,7 +22,6 @@ db.init_app(app)
 app.register_blueprint(rates_bp, url_prefix="/rates")
 app.register_blueprint(price_bp, url_prefix="/price")
 
-
 def create_app():
     with app.app_context():
         # Create the database tables if they don't exist
@@ -32,8 +31,11 @@ def create_app():
         parking_rate_service.load_rates(app.app_context())
 
         if not app.debug:
-            handler = RotatingFileHandler("error.log", maxBytes=10240, backupCount=10)
+            log_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../error.log'))
+            handler = RotatingFileHandler(log_file_path, maxBytes=10240, backupCount=10)
             handler.setLevel(logging.INFO)
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+            handler.setFormatter(formatter)
             app.logger.addHandler(handler)
 
     return app

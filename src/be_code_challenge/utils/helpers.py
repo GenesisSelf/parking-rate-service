@@ -9,6 +9,8 @@ def parse_iso_datetime(date_str):
 
 
 def get_day_of_week(dt):
+    if dt.strftime("%a").lower() == 'thu':
+        return 'thurs'
     return dt.strftime("%a").lower()
 
 

@@ -15,8 +15,7 @@ local_tz = pytz.timezone(local_timezone)
 def get_price():
     start = request.args.get("start")
     end = request.args.get("end")
-
-    # used because url encoding wants '+' to be '%2B'
+    # Used because url encoding wants '+' to be '%2B'
     start = start.replace(" ", "+")
     end = end.replace(" ", "+")
 
@@ -37,7 +36,6 @@ def get_price():
         if end_dt_local <= start_dt_local:
             current_app.logger.warning("End dt is before start dt")
             return jsonify({"error": "end must be after start"}), 400
-
         # Check if the dates span more than one day; could be improved for when there are rates that span overnight or multi-days
         if start_dt_local.date() != end_dt_local.date():
             current_app.logger.warning(

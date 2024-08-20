@@ -6,6 +6,9 @@ from datetime import datetime
 from src.be_code_challenge.models.db import db, Rate
 from src.be_code_challenge.utils.helpers import load_rates_from_json, is_time_within_range, parse_time_range, get_day_of_week
 
+
+rates_file_path = os.getenv("RATES_FILE")
+
 class ParkingRateService:
     def __init__(self):
         self.rates = []
@@ -16,7 +19,8 @@ class ParkingRateService:
             if Rate.query.count() == 0:
                 current_app.logger.info("Loading rates from JSON file")
                 try:
-                    rates_file_path = os.path.join(os.path.dirname(__file__), '../../../rates.json')
+                    if not rates_file_path:
+                        raise ValueError("RATES_FILE environment variable is not set")
 
                     rates = load_rates_from_json(rates_file_path)
                     # Populate the database with JSON data

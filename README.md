@@ -12,8 +12,6 @@ Install dependencies:
 Build project:
 `poetry build`
 
-Traditionally the .env file would not be committed or included but for purposes of it being a zipped tech assignment, it has been included. Feel free to adjust if necessary.
-
 Database setup
 If a previous database has not been created, the application will set it up for you automatically based off the data in the rates.json file.
 
@@ -22,9 +20,11 @@ TODO: set up database migrations
 ## Running app
 Please ensure debug on app.py is set to `True` and run 
 ```
-export FLASK_APP=src/be_code_challenge.app:create_app
+export PYTHONPATH=src
 
-FLASK_APP=src/be_code_challenge.app:create_app poetry run flask run
+export FLASK_APP=src.be_code_challenge.app:create_app
+
+poetry run flask run
 ```
 
 Examples of api calls:
